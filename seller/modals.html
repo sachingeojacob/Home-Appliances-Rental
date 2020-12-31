@@ -1,0 +1,252 @@
+<?php
+session_start();
+//$uname=$_SESSION['uname'];
+if(isset ($_SESSION['uname']))
+{
+	$uname=$_SESSION['uname'];
+	include("db.php");
+$obj=new db(); 
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Modernize an Admin Panel Category Bootstrap Responsive Web Template | Grids :: w3layouts</title>
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Modernize Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta Tags -->
+
+    <!-- Style-sheets -->
+    <!-- Bootstrap Css -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Bootstrap Css -->
+    <!-- Common Css -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--// Common Css -->
+    <!-- Nav Css -->
+    <link rel="stylesheet" href="css/style4.css">
+    <!--// Nav Css -->
+    <!-- Fontawesome Css -->
+    <link href="css/fontawesome-all.css" rel="stylesheet">
+    <!--// Fontawesome Css -->
+    <!--// Style-sheets -->
+
+    <!--web-fonts-->
+    <link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!--//web-fonts-->
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+       
+           
+                <?php
+				include("aside.php");
+				?>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+            <!-- top-bar -->
+            <nav class="navbar navbar-default mb-xl-5 mb-4">
+                <div class="container-fluid">
+
+                  
+                           <?php
+						   include("aheader.php");
+						   ?>
+                </div>
+            </nav>
+            <!--// top-bar -->
+
+            <!-- main-heading -->
+            <h2 class="main-title-w3layouts mb-2 text-center">Employee Details</h2>
+			 <?php
+		  $sql="select * from employee";
+		  $res=$obj->exe($sql);
+		  $no=mysqli_num_rows($res);
+		  if($no==0)
+		  {
+			  echo "&quot;No records here!!&quot;";
+		  }
+		  else
+		  {
+		  ?>
+            <!--// main-heading -->
+
+            <!-- Grids Content -->
+            <section class="grids-section bd-content">
+
+                <!-- Grids Info -->
+                <div class="outer-w3-agile mt-3">
+                  
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                   Name
+                                    <br>
+                                    
+                                </th>
+                                <th class="text-center">
+                                   Housename
+                                    <br>
+                                    
+                                </th>
+                                <th class="text-center">
+                                    Place
+                                    <br>
+                                   
+                                </th>
+                                <th class="text-center">
+                                    District
+                                    <br>
+                                   
+                                </th>
+                                <th class="text-center">
+                                    Pin
+                                    <br>
+                                    
+                                </th>
+                                <th class="text-center">
+                                    Gender
+                                    <br>
+                                  
+                                </th>
+								<th class="text-center">
+                                    Email
+                                    <br>
+                                  
+                                </th>
+								<th class="text-center">
+                                    Phone
+                                    <br>
+                                  
+                                </th>
+								<th class="text-center">
+                                    Action
+                                    <br>
+                                  
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+						<?php
+			while($row=mysqli_fetch_array($res))
+			{
+		  ?>
+                            <tr>
+                                <th class="text-nowrap" scope="row"><?php echo $row[1];?></th>
+                                <td><?php echo $row[2];?></td>
+                                <td><?php echo $row[3];?></td>
+                                <td><?php echo $row[4];?></td>
+                                <td><?php echo $row[5];?></td>
+                                <td><?php echo $row[6];?></td>
+								 <td><?php echo $row[7];?></td>
+								  <td><?php echo $row[8];?></td>
+								  <td>
+								   <?php
+						if($row[11]=="0")
+						{
+							?>
+                       <a href="approveemp.php?id=<?php echo $row[0]?>" style="color:#006600">Approve</a> / 
+                       <a href="rejectemp.php?id=<?php echo $row[0]?>" style="color:#FF0000">Reject</a>
+							<?php
+						}
+						if($row[11]=="1")
+						{
+							?>
+                            <font style="color:#FF0000; font-style:italic;" >Approved</font>
+                            <?php
+						}
+						?> 
+						</td>
+                            </tr>
+                           
+                           
+                        </tbody>
+						 <?php
+			}
+		  ?>
+                    </table>
+                
+                <!--// Grids Info -->
+              
+ <?php
+			}
+		  ?>
+				
+           
+
+            <!--// Grids Content -->
+
+          <?php
+		  include("afooter.php");
+		  ?>
+        </div>
+    </div>
+
+
+    <!-- Required common Js -->
+    <script src='js/jquery-2.2.3.min.js'></script>
+    <!-- //Required common Js -->
+
+    <!-- Sidebar-nav Js -->
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+    <!--// Sidebar-nav Js -->
+
+    <!-- dropdown nav -->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //dropdown nav -->
+
+    <!-- Js for bootstrap working-->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- //Js for bootstrap working -->
+
+</body>
+
+</html>
+<?php
+ }
+ else
+ {
+ ?>
+ <script>
+ alert("Invaid Login");
+ window.location="index.php";
+ </script>
+ <?php
+ }
+ ?>
